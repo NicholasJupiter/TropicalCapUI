@@ -8,13 +8,32 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "types": ["vite/client"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "types": [
+      "vite/client"
+    ],
     "paths": {
-      "/@/*": [
+      "@/*": [
         "./src/*"
+      ],
+      "pack/*": [
+        "./src/packages/*"
+      ],
+      "mobile/*": [
+        "./src/sites/mobile/*"
+      ],
+      "docs/*": [
+        "./src/sites/docs/*"
       ]
     },
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ]
 }

@@ -4,19 +4,11 @@
   </button>
 </template>
 <script lang="ts">
-export type TButtonType =
-  | 'default'
-  | 'primary'
-  | 'info'
-  | 'success'
-  | 'warning'
-  | 'danger';
-export type TButtonSize = 'normal' | 'small' | 'large';
-import { defineComponent, onMounted, PropType } from 'vue';
-import { componentMixins, getComponentName } from '/@/util/component';
+import { defineComponent, PropType } from 'vue';
+import { TButtonSize, TButtonType } from '../type';
 
 export default defineComponent({
-  name: getComponentName('button'),
+  name: 'ju-button',
   emits: ['click'],
   props: {
     plain: {

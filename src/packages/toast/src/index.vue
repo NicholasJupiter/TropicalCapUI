@@ -1,10 +1,15 @@
 <template>
-
+  <div class="ju-toast">
+    
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-  name: 'ju-button-preview',
+  name: 'ju-toast',
+  props: {
+  }, 
+  emits: [],
   setup() {
     return {}
   }

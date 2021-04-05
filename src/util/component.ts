@@ -1,4 +1,4 @@
-import { App, defineComponent, DefineComponent } from 'vue';
+import { App, DefineComponent } from 'vue';
 
 export const componentMixins = {
   computed: {
@@ -12,10 +12,13 @@ export function getComponentName(afterName: string) {
   return 'ju-' + afterName;
 }
 
-export function install(component: DefineComponent, call?: Function) {
+export function install(
+  component: DefineComponent,
+  call?: (Vue: App, component: DefineComponent) => void
+) {
   component.install = function (Vue: App) {
     Vue.component(component.name, component);
+    call && call(Vue, component);
   };
-  call && call(component);
   return component;
 }

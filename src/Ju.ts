@@ -1,16 +1,10 @@
 import { App } from 'vue';
+import Loading from 'pack/loading/index';
+const coms = [Loading];
 
-const modules = import.meta.glob('./packages/*/index.ts');
-const components: any[] = [];
-
-for (const path in modules) {
-  const { default: _ } = await modules[path]();
-  components.push(_);
-}
-
-function install(Vue: App) {
-  components.forEach((com) => {
-    Vue.use(com);
+function install(app: App) {
+  coms.forEach((com: any) => {
+    app.use(com);
   });
 }
 
