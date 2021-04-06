@@ -1,7 +1,10 @@
 <template>
   <aside>
     <div class="slide-item">
-      <div v-for="(nav, index) in navs" :key="index">{{ nav.name }}</div>
+      <template v-for="(nav, index) in navs" :key="index">
+        <router-link :to="index"> {{ nav.name }}{{ index }} </router-link>
+        <!-- {{ nav.name }}{{ index }}  -->
+      </template>
     </div>
   </aside>
 </template>
@@ -13,15 +16,7 @@ export default defineComponent({
   props: {},
   emits: [],
   setup(_props, ctx) {
-    const navs = reactive<any[]>([]);
-    const modules = getComs();
-    for (const path in modules) {
-      if (modules[path]) {
-        navs.push(modules[path]);
-      }
-    }
-    console.log(navs);
-
+    const navs = reactive<{}>(getComs());
     return {
       navs
     };

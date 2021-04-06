@@ -1,5 +1,5 @@
 <template>
-  <p>123</p>
+  <router-view />
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';

@@ -1,5 +1,6 @@
 <template>
   <button @click="service">显示loading</button>
+  <button @click="close">关闭loading</button>
 </template>
 <script lang="ts">
 import { defineComponent, getCurrentInstance } from 'vue';
@@ -8,12 +9,12 @@ export default defineComponent({
   props: {},
   emits: [],
   setup() {
-    console.log(this);
-    // 
-    // const { ctx } = getCurrentInstance();
-    console.log(getCurrentInstance());
+    const { proxy } = getCurrentInstance()!;
     const service = () => {
-      // ctx.$loading.service();
+      proxy.$loading.service();
+    };
+    const close = () => {
+      proxy.$loading.close();
     };
     return { service };
   }

@@ -3,7 +3,7 @@ export function getComs() {
   const rets: { [key: string]: any } = {};
   for (const path in modules) {
     const { default: _ } = modules[path];
-    rets[path] = _;
+    _ && (rets[getName(path)] = _);
   }
   return rets;
 }
@@ -13,7 +13,7 @@ export function getComsByMd() {
   const rets: { [key: string]: any } = {};
   for (const path in modules) {
     const { default: _ } = modules[path];
-    rets[path] = _;
+    _ (rets[getName(path)] = _);
   }
   return rets;
 }
@@ -23,7 +23,11 @@ export function getComsByDemo() {
   const rets: { [key: string]: any } = {};
   for (const path in modules) {
     const { default: _ } = modules[path];
-    rets[path] = _;
+    _ (rets[getName(path)] = _);
   }
   return rets;
+}
+
+export function getName (path: string) {
+  return (/packages\/([^/]*)/.exec(path) as string[])[1];
 }

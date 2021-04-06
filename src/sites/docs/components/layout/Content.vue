@@ -1,16 +1,39 @@
 <template>
-  <div id="preview-mobile">
-    <iframe src="preview.html" frameborder="0"></iframe>
+  <div class="content">
+    <router-view />
+    <div id="preview-mobile">
+      <iframe :src="previewUrl" frameborder="0"></iframe>
+    </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
+import {
+  onBeforeRouteUpdate,
+  RouteLocationNormalized,
+  useRoute
+} from 'vue-router';
 export default defineComponent({
   name: 'doc-content',
   props: {},
   emits: [],
   setup() {
-    return {};
+    // 更新路由时 改变iframe的地址
+    const previewUrl = ref('preview.html');
+    const watchPreviewUrl = (router: RouteLocationNormalized) => {
+      const { origin, pathname } = window.location;
+      previewUrl.value = `${origin}${pathname.replace(
+        'index.html',
+        ''
+      )}preview.html#${router.path}`;
+    };
+    onMounted(() => {
+      watchPreviewUrl(useRoute());
+    });
+    onBeforeRouteUpdate((to) => {
+      watchPreviewUrl(to);
+    });
+    return { previewUrl };
   }
 });
 </script>

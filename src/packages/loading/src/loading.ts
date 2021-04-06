@@ -4,15 +4,16 @@ import { TLoadingOptions } from './types';
 const _loading = defineComponent(Loading);
 let container: Element | null = null;
 
+
+// _loading.close = () => {
+//   container && container.remove();
+// };
+
 _loading.service = (options: TLoadingOptions = {}) => {
   container = document.createElement('div');
   const vm = createVNode(_loading, options);
   render(vm, container);
-  document.appendChild(container.firstElementChild!);
-};
-
-_loading.close = () => {
-  container && container.remove();
+  document.body.appendChild(container.firstElementChild!);
 };
 
 export default _loading;

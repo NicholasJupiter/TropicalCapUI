@@ -1,11 +1,13 @@
 import { App } from 'vue';
-import Loading from 'pack/loading/index';
-const coms = [Loading];
+import { getComs } from './util/package';
 
 function install(app: App) {
-  coms.forEach((com: any) => {
-    app.use(com);
-  });
+  const coms = getComs();
+  for (const key in coms) {
+    if (Object.prototype.hasOwnProperty.call(coms, key)) {
+      app.use(coms[key]);
+    }
+  }
 }
 
 export default { install, version: '1.0.0-beta.1' };
