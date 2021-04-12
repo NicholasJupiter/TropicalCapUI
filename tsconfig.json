@@ -15,18 +15,19 @@
     "types": [
       "vite/client"
     ],
+    "baseUrl": "./",
     "paths": {
       "@/*": [
-        "./src/*"
+        "src/*"
       ],
       "pack/*": [
-        "./src/packages/*"
+        "src/packages/*"
       ],
       "mobile/*": [
-        "./src/sites/mobile/*"
+        "src/sites/mobile/*"
       ],
       "docs/*": [
-        "./src/sites/docs/*"
+        "src/sites/docs/*"
       ]
     },
   },
@@ -35,5 +36,9 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

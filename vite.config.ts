@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
-import Markdown from 'vite-plugin-md';
+import MD from 'vite-plugin-md';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,7 +27,7 @@ export default defineConfig({
     vue({
       include: [/\.vue$/, /\.md$/]
     }),
-    Markdown()
+    MD()
   ],
   build: {
     target: 'es2015',

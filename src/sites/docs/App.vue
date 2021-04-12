@@ -12,22 +12,12 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scope>
-.docs {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+<style lang="scss">
+body {
   background-color: #f0f3f6;
-  header {
-    width: 100%;
-    height: 60px;
-  }
-  > main {
-    flex: 1;
-    display: flex;
-    width: 100%;
-  }
+}
+#app {
+  // height: 100vh;
+  margin: 0 auto;
 }
 </style>

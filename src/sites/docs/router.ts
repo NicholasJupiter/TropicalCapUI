@@ -1,6 +1,6 @@
 import { getName } from '@/util/package';
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-const previews = import.meta.glob('/src/packages/*/preview.vue');
+const previews = import.meta.glob('/src/packages/*/preview.md');
 const children: RouteRecordRaw[] = [];
 
 for (const path in previews) {
