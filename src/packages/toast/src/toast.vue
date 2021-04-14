@@ -1,14 +1,15 @@
 <template>
-  <div
-    class="ju-toast"
-    :class="classes"
-    v-if="visibled"
-    :style="{
-      [options.location]: options.offset
-    }"
-    ref="toast"
-  >
-  </div>
+  <transition name="fade">
+    <div
+      class="cap-toast"
+      v-if="visibled"
+      :style="{
+        [options.location]: options.offset
+      }"
+    >
+      <div class="cap-toast__content" ref="content"></div>
+    </div>
+  </transition>
 </template>
 <script lang="ts">
 import {
@@ -23,7 +24,7 @@ import {
 import { TToastOptions } from './types';
 import '@/assets/styles/animation.scss';
 export default defineComponent({
-  name: 'ju-toast',
+  name: 'cap-toast',
   props: {},
   emits: [],
   setup() {
@@ -33,69 +34,67 @@ export default defineComponent({
       duration: 2000,
       showClose: false
     });
-
+    const timeout = ref(0);
     const visibled = ref(false);
-    const toast = ref(null);
-    const classes = reactive<{ [key: string]: boolean }>({});
+    const content = ref(null);
     // 打开
     const show = (_options: TToastOptions) => {
+      _clearTimeout();
       visibled.value = true;
       _options && Object.assign(options, _options);
       // 创建DOM
       nextTick(() => {
-        setTimeout(() => {
-          classes['fade-out'] = false;
-        }, 3000);
-        if (options.content && toast.value) {
+        if (options.content && content.value) {
           let vm = null;
           if (typeof options.content === 'object') {
             vm = createVNode(options.content);
           } else {
             vm = createVNode(h('span', options.content));
           }
-          render(vm, toast.value!);
+          render(vm, content.value!);
         }
-        if (options.duration) {
-          setTimeout(() => {
-            close();
-          }, options.duration);
-        }
+        close();
       });
     };
     // 关闭
     const close = () => {
-      classes['fade-out'] = true;
-      setTimeout(() => {
-        visibled.value = false;
-      }, 350);
+      if (options.duration) {
+        timeout.value = setTimeout(() => {
+          visibled.value = false;
+          _clearTimeout();
+        }, options.duration);
+      }
     };
 
-    return { options, visibled, show, close, toast, classes };
+    const _clearTimeout = () => {
+      timeout.value && window.clearTimeout(timeout.value);
+      timeout.value = 0;
+    };
+
+    return { options, visibled, show, close, content };
   }
 });
 </script>
 <style lang="scss" scoped>
-// @import '@/assets/styles/animation.scss';
-.ju-toast {
-  width: 343px;
+.cap-toast {
+  width: 100%;
   height: 56px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
-  padding: 16px;
-  background-color: $color-page-mask-000;
-  box-shadow: 0px 8px 32px 0px rgba($color: #000000, $alpha: 0.2);
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  border-radius: 6px;
   z-index: 100;
-  font-size: 14px;
-  color: white;
-  opacity: 0;
-  overflow: hidden;
-  animation: fadeIn 0.3s ease-out forwards;
-  &.fade-out {
-    animation: fadeOut 0.3s ease-in forwards;
+  > .cap-toast__content {
+    width: 100%;
+    background-color: $color-page-mask-000;
+    box-shadow: 0px 8px 32px 0px rgba($color: #000000, $alpha: 0.2);
+    padding: 16px;
+    overflow: hidden;
+    font-size: 14px;
+    color: white;
+    border-radius: 6px;
   }
 }
 </style>

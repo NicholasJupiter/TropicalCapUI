@@ -1,6 +1,6 @@
 <template>
   <div
-    class="ju-loading"
+    class="cap-loading"
     v-if="visibled"
     :style="[options.mask ? `background-color: rgba(0,0,0,0.5)` : '']"
     ref="loading"
@@ -57,7 +57,7 @@ import {
 } from 'vue';
 import { TLoadingOptions } from './types';
 export default defineComponent({
-  name: 'ju-loading',
+  name: 'cap-loading',
   props: {
     mask: {
       type: Boolean,
@@ -99,7 +99,7 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-.ju-loading {
+.cap-loading {
   position: fixed;
   top: 0;
   bottom: 0;

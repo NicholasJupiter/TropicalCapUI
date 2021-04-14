@@ -1,11 +1,11 @@
 <template>
   <button @click="show">显示Toast</button>
-  <button @click="customShow">插入HTML代码段</button>
+  <button @click="customShow">插入DOM元素</button>
 </template>
 <script lang="ts">
 import { defineComponent, getCurrentInstance, h } from 'vue';
 export default defineComponent({
-  name: 'ju-toast-preview',
+  name: 'cap-toast-preview',
   props: {},
   emits: [],
   setup(props, ctx) {

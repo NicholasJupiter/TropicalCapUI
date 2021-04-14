@@ -1,5 +1,5 @@
 <template>
-  <div class="ju-switch">
+  <div class="cap-switch">
     
   </div>
 </template>

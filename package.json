@@ -1,14 +1,13 @@
 {
-  "name": "vite-components",
-  "version": "0.0.1-best",
-  "author": "jupiter",
+  "name": "tropical-cap-ui",
+  "version": "1.0.1-best",
+  "author": "Jupiter",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview"
   },
   "dependencies": {
-    "highlight.js": "^10.3.1",
     "vue": "^3.0.5",
     "vue-router": "^4.0.4"
   },

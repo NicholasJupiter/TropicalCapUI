@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-  name: 'ju-dialog-preview',
+  name: 'cap-dialog-preview',
   props: {
   },
   emits: [],

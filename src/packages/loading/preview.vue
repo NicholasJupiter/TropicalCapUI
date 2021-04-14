@@ -1,11 +1,11 @@
 <template>
   <button @click="service">显示loading</button>
-  <button @click="custom">插入HTML代码段</button>
+  <button @click="custom">插入DOM元素</button>
 </template>
 <script lang="ts">
 import { defineComponent, getCurrentInstance, h } from 'vue';
 export default defineComponent({
-  name: 'ju-loading-preview',
+  name: 'cap-loading-preview',
   props: {},
   emits: [],
   setup() {

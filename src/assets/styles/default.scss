@@ -2,11 +2,24 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: PingFang SC,Microsoft YaHei,Helvetica,Hiragino Sans GB,SimSun,sans-serif;
+  border: 0;
+  box-shadow: none;
+  font-family: PingFang SC, Microsoft YaHei, Helvetica, Hiragino Sans GB, SimSun, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   &:not(:focus-visible) {
     outline: none;
+  }
+}
+input {
+  outline: 0;
+  appearance: none;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  &[type="number"] {
+    -moz-appearance: textfield;
   }
 }

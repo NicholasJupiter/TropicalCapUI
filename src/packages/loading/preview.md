@@ -21,7 +21,7 @@ setTimeout(() => {
 }, 3000);
 ```
 
-## 插入HTML代码段
+## 插入DOM元素
 
 ```javascript
 proxy.$loading.service({

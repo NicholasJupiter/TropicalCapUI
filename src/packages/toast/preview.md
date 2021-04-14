@@ -15,7 +15,7 @@ this.$toast.show({
 });
 ```
 
-## 插入HTML代码段
+## 插入DOM元素
 
 ```javascript
 proxy.$toast.show({
@@ -26,7 +26,6 @@ proxy.$toast.show({
 ## API
 
 ### options
-
 
 |  参数   | 说明  | 类型 | 默认值 | 版本
 |  ----  | ----  | ---- | ---- | -

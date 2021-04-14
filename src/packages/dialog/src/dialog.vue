@@ -1,10 +1,10 @@
 <template>
-  <div class="ju-dialog"> </div>
+  <div class="cap-dialog"> </div>
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
 export default defineComponent({
-  name: 'ju-dialog',
+  name: 'cap-dialog',
   props: {},
   emits: [],
   setup(props, ctx) {

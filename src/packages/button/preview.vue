@@ -4,7 +4,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-  name: 'ju-button-preview',
+  name: 'cap-button-preview',
   setup() {
     return {}
   }

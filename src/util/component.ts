@@ -9,7 +9,7 @@ export const componentMixins = {
 };
 
 export function getComponentName(afterName: string) {
-  return 'ju-' + afterName;
+  return 'cap-' + afterName;
 }
 
 export function install(

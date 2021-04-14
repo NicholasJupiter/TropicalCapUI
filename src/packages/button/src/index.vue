@@ -1,5 +1,5 @@
 <template>
-  <button class="ju-button" @click="onClick">
+  <button class="cap-button" @click="onClick">
     <slot></slot>
   </button>
 </template>
@@ -8,7 +8,7 @@ import { defineComponent, PropType } from 'vue';
 import { TButtonSize, TButtonType } from '../type';
 
 export default defineComponent({
-  name: 'ju-button',
+  name: 'cap-button',
   emits: ['click'],
   props: {
     plain: {
