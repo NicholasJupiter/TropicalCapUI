@@ -77,9 +77,9 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .cap-toast {
-  width: 100%;
+  width: calc(100% - 32px);
   height: 56px;
-  padding: 0 16px;
+  // padding: 0 16px;
   display: flex;
   align-items: center;
   position: fixed;

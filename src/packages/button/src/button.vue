@@ -1,10 +1,10 @@
 <template>
-  <button class="cap-button" @click="onClick">
+  <button class="cap-button" @click="onClick" :disabled="disabled">
     <slot></slot>
   </button>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { computed, defineComponent, PropType, reactive } from 'vue';
 import { TButtonSize, TButtonType } from '../type';
 
 export default defineComponent({
@@ -29,7 +29,7 @@ export default defineComponent({
     },
     size: {
       type: String as PropType<TButtonSize>,
-      default: 'normal'
+      default: 'medium'
     },
     round: {
       type: Boolean,
@@ -39,26 +39,32 @@ export default defineComponent({
       type: String,
       default: ''
     },
-    nextIcon: {
+    afterIcon: {
       type: String,
       default: ''
     }
   },
   setup(props, ctx) {
-    console.log(ctx);
+    const name = 'cap-button-';
     const onClick = (event: MouseEvent) => {
-      console.log(1);
-
       ctx.emit('click', event);
     };
+    const classes = reactive({
+      [name + props.type]: true,
+      [name + props.size]: true,
+      plain: props.plain,
+      round: props.round,
+      disabled: props.disabled,
 
-    // const classes = computed(() => {
-    //   [this.name + ``];
-    // });
+    });
     return { onClick };
   }
 });
 </script>
 <style lang="scss" scoped>
-@import './index.scss';
+.cap-button {
+  .round {
+    border-radius: 60px;
+  }
+}
 </style>
