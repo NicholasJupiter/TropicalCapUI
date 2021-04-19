@@ -1,6 +1,6 @@
 <template>
-  <button @click="service">显示loading</button>
-  <button @click="custom">插入DOM元素</button>
+  <cap-button @click="service" size="small">显示loading</cap-button>
+  <cap-button @click="custom" size="small">插入DOM元素</cap-button>
 </template>
 <script lang="ts">
 import { defineComponent, getCurrentInstance, h } from 'vue';

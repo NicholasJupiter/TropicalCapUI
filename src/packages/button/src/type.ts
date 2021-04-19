@@ -1,9 +1,7 @@
 export type TButtonType =
-  | 'primary'
   | 'default'
   | 'assistant'
   | 'secondary'
-  | 'warning'
   | 'danger'
   | 'success';
 

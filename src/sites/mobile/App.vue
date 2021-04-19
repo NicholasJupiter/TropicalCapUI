@@ -54,7 +54,6 @@ export default defineComponent({
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.07);
   }
   #mobile-content {
-    margin-top: 20px;
     flex: 1;
     width: 100%;
     overflow: auto;

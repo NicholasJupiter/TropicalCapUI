@@ -1,13 +1,14 @@
 <template>
   <div class="cap-cell">
-    <slot name="before"></slot>
+    <slot name="leading"></slot>
     <div class="cell-content" :style="{ 'margin-left': slots.before && '16px' }">
       <div class="cell__content">
         <slot></slot>
       </div>
-      <div class="cell__after">
-        <slot name="after"></slot>
+      <div class="cell__guide-text">
+        <slot name="guide-text"></slot>
       </div>
+      <slot name="trailing"></slot>
     </div>
   </div>
 </template>
@@ -29,6 +30,7 @@ export default defineComponent({
   align-items: center;
   padding-left: 16px;
   min-height: 48px;
+  cursor: pointer;
   
   .cell-content {
     display: flex;
@@ -43,7 +45,7 @@ export default defineComponent({
       font-size: 16px;
       line-height: 1.5;
     }
-    .cell__after{
+    .cell__guide-text{
       margin-left: auto;
     }
   }

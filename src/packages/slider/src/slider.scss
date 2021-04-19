@@ -1,0 +1,44 @@
+.cap-slider {
+  padding: 0 16px;
+  .cap-slider__content {
+    width: 100%;
+    position: relative;
+    background-color: $color-font-color-0-1;
+    cursor: pointer;
+    .cap-slide__range {
+      position: absolute;
+      height: 100%;
+      background-color: $color-blue-7;
+      .slider-move-btn-left,
+      .slider-move-btn-right {
+        cursor: grab;
+        position: absolute;
+        height: 100%;
+      }
+      .slider-move-btn-left {
+        left: 0;
+        transform: translateX(-50%);
+      }
+      .slider-move-btn-right {
+        right: 0;
+        transform: translateX(50%);
+      }
+    }
+  }
+
+  &--block {
+    > .cap-slider__content {
+      height: 24px;
+      border-radius: 4px;
+    }
+
+    .slider-move-btn-left,
+    .slider-move-btn-right {
+      width: 24px;
+      border: 2px solid $color-blue-6;
+      background-color: white;
+      border-radius: 4px;
+      box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.06), -2px 0px 3px rgba(35, 69, 190, 0.12);
+    }
+  }
+}

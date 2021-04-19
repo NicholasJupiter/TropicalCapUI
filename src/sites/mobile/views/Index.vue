@@ -14,17 +14,17 @@ export default defineComponent({
   }
 });
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .preview-content {
-  > :deep(div) {
-    padding: 10px 10px;
-    > p.title {
-      margin: 16px 0;
-      font-size: 16px;
-    }
-    > div + div {
-      margin-top: 20px;
-    }
+  padding: 10px 10px;
+  > h1,
+  > h2,
+  > h3,
+  > h4 {
+    margin: 16px 0;
+  }
+  > div + div {
+    margin-top: 20px;
   }
 }
 </style>

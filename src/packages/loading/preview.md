@@ -34,10 +34,9 @@ proxy.$loading.service({
 
 ### options
 
-
-|  参数   | 说明  | 类型 | 默认值 |
-|  ----  | ----  | ---- | ---- |
-| content | 显示文案 | string/VNode | '' |
-| color | 加载效果的颜色 | string | #6481DC |
-| size | Loading大小 | number | 48 |
-| mask | 是否显示蒙层 | boolean | true |
+|  参数   | 说明  | 类型 | 默认值 | 版本
+|  ----  | ----  | ---- | ---- | -
+| content | 显示文案 | string/VNode | `''` | -
+| color | 加载效果的颜色 | string | `#6481DC` | -
+| size | Loading大小 | number | `48` | -
+| mask | 是否显示蒙层 | boolean | `true` | -

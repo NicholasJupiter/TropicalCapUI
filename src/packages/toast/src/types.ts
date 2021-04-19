@@ -1,4 +1,4 @@
-import { VNode } from 'vue';
+import { ComponentInternalInstance, VNode } from 'vue';
 
 export type TToastOptions = Partial<{
   content: string | VNode;
@@ -8,4 +8,5 @@ export type TToastOptions = Partial<{
   offset: string;
   duration: number;
   showClose: boolean;
+  clickFn: (toastInstance: ComponentInternalInstance) => void;
 }>;

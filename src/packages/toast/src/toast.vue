@@ -6,6 +6,7 @@
       :style="{
         [options.location]: options.offset
       }"
+      @click="handleClick"
     >
       <div class="cap-toast__content" ref="content"></div>
     </div>
@@ -15,6 +16,7 @@
 import {
   createVNode,
   defineComponent,
+  getCurrentInstance,
   h,
   nextTick,
   reactive,
@@ -28,6 +30,7 @@ export default defineComponent({
   props: {},
   emits: [],
   setup() {
+    const instance = getCurrentInstance();
     const options = reactive<TToastOptions>({
       offset: '16px',
       location: 'bottom',
@@ -71,7 +74,13 @@ export default defineComponent({
       timeout.value = 0;
     };
 
-    return { options, visibled, show, close, content };
+    const handleClick = () => {
+      if (options?.clickFn) {
+        options.clickFn(instance!);
+      }
+    };
+
+    return { options, visibled, show, close, content, handleClick };
   }
 });
 </script>
