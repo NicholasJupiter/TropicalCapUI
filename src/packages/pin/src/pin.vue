@@ -12,12 +12,14 @@
       :maxlength="length"
       :disabled="disabled"
       ref="realInput"
+      @focus="onFocus"
+      @blur="onBlur"
     />
     <div
       v-for="(val, i) in length"
       :key="i"
       class="value__input"
-      :class="{ 'input--focus': modelValue.length === i }"
+      :class="{ 'input--focus': isFocus && modelValue.length === i }"
     >
       <span :class="{ password, 'has--value': modelValue[i] }">
         {{ password || !modelValue[i] ? '&nbsp;' : modelValue[i] }}
@@ -57,6 +59,15 @@ export default defineComponent({
   emits: ['change', 'update:modelValue'],
   setup(props, ctx) {
     const realInput = ref<HTMLInputElement>();
+    const isFocus = ref(false);
+    const onBlur = () => {
+      isFocus.value = false;
+    }
+
+    const onFocus = () => {
+      isFocus.value = true;
+    }
+
     const handleClick = () => {
       realInput.value?.focus();
     };
@@ -70,7 +81,7 @@ export default defineComponent({
       ctx.emit('change', target.value);
     };
 
-    return { valueChange, realInput, handleClick };
+    return { valueChange, realInput, handleClick, onBlur, onFocus, isFocus };
   }
 });
 </script>

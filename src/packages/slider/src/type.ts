@@ -6,3 +6,4 @@ export type TRect = {
   width: 0;
   height: 0;
 };
+export type TTouchType = 'min' | 'max';

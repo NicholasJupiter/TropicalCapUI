@@ -9,6 +9,7 @@
       position: absolute;
       height: 100%;
       background-color: $color-blue-7;
+      // transition: width .3s;
       .slider-move-btn-left,
       .slider-move-btn-right {
         cursor: grab;

@@ -2,13 +2,29 @@
   <div class="cap-slider" :class="classes">
     <slot name="leading"></slot>
     <div class="cap-slider__content" @click="onClick" ref="content">
-      <div class="cap-slide__range" :style="rangeStyle">
-        <div class="slider-move-btn-left" v-if="range" @click.stop></div>
+      <div
+        class="cap-slide__range"
+        role="slider"
+        :aria-valuemax="+maxValue"
+        :aria-valuemin="minValue"
+        :aria-valuenow="modelValue"
+        aria-orientation="horizontal"
+        :style="rangeStyle"
+      >
         <div
-          class="slider-move-btn-right"
-          @touchstart.stop.prevent="touchStart"
+          class="slider-move-btn-left"
+          v-if="range"
+          @touchstart.stop.prevent="touchStart($event, 0)"
           @touchmove.stop.prevent="touchMove"
           @touchend.stop.prevent="touchEnd"
+          @click.stop
+        ></div>
+        <div
+          class="slider-move-btn-right"
+          @touchstart.stop.prevent="touchStart($event, 1)"
+          @touchmove.stop.prevent="touchMove"
+          @touchend.stop.prevent="touchEnd"
+          @touchcancel.stop.prevent="touchEnd"
           @click.stop
         ></div>
       </div>
@@ -17,16 +33,10 @@
   </div>
 </template>
 <script lang="ts">
-import {
-  computed,
-  CSSProperties,
-  defineComponent,
-  onMounted,
-  reactive,
-  ref
-} from 'vue';
-import { TRect } from './type';
+import { computed, defineComponent, onMounted, reactive, ref } from 'vue';
+import { TRect, TTouchType } from './type';
 import { useTouch } from '@/util/touch';
+import { debounce } from '@/util/util';
 export default defineComponent({
   name: 'cap-slider',
   props: {
@@ -58,6 +68,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    step: {
+      type: Number,
+      default: 1
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -80,42 +94,95 @@ export default defineComponent({
       };
     });
 
-    const emitValue = () => {};
-    
+    const emitValue = (value: number) => {
+      value = formatValue(value);
+      if (props.range) {
+        if (props.minValue > props.maxValue) {
+          emit('update:minValue', props.maxValue);
+          console.log(value);
+          
+          emit('update:maxValue', value);
+          currTouchType = 1;
+          // currTouchType = 1;
+          // startRangeValue[currTouchType] = props.minValue;
+          // emit(
+          //   currTouchType === 0 ? 'update:maxValue' : 'update:minValue',
+          //   value
+          // );
+          return;
+        }
+        emit(
+          currTouchType === 0 ? 'update:minValue' : 'update:maxValue',
+          value
+        );
+        return;
+      }
+      emit('update:modelValue', value);
+    };
+
     const onClick = (event: MouseEvent) => {
       if (props.disabled) {
         return;
       }
-      const offset = event.clientX - rect.value!.left;
-      const value = Math.round(
-        props.min + (offset / rect.value!.width) * scope.value
-      );
-      emit('update:modelValue', value);
-      calcWidth();
+      const value = event.clientX - rect.value!.left;
+      if (!props.range) {
+        emitValue(props.min + (value / rect.value!.width) * scope.value);
+      }
     };
 
-    const touchStart = (event: TouchEvent) => {
+    const formatValue = (value: number) => {
+      value = Math.max(props.min, Math.min(value, props.max));
+      return Math.round(value / props.step) * props.step;
+    };
+    let startValue: number = 0;
+    let startRangeValue: number[] = [];
+    let currTouchType = 1;
+
+    const touchStart = (event: TouchEvent, touchType: number) => {
       if (props.disabled) return;
+      currTouchType = touchType;
       touch.start(event);
+      if (props.range) {
+        startRangeValue[currTouchType] = formatValue(
+          props[currTouchType === 0 ? 'minValue' : 'maxValue']
+        );
+      } else {
+        startValue = formatValue(props.modelValue);
+      }
     };
     const touchMove = (event: TouchEvent) => {
       if (props.disabled) return;
       touch.move(event);
-
-      calcWidth();
+      const touchX = touch.touchX.value;
+      const offset = (touchX / rect.value!.width) * scope.value;
+      let value = (startValue as number) + offset;
+      if (props.range) {
+        // startRangeValue[currTouchType] =
+        //   startRangeValue[currTouchType] + offset;
+        value = startRangeValue[currTouchType] + offset;
+      }
+      emitValue(value);
+      // debounce(emitValue, 100)(value);
     };
     const touchEnd = () => {};
-    // 计算left
-    const calcLeft = () => {};
-    // 计算宽度
-    const calcWidth = () => {
-      const { modelValue, min } = props;
-      return `${((modelValue - min) * 100) / scope.value}%`;
-    };
+
     const rangeStyle = computed(() => {
+      const calcWidth = () => {
+        if (props.range) {
+          return `${((props.maxValue - props.minValue) * 100) / scope.value}%`;
+        }
+        return `${((props.modelValue - props.min) * 100) / scope.value}%`;
+      };
+      const calcLeft = () => {
+        if (props.range) {
+          return `${((props.minValue - props.min) * 100) / scope.value}%`;
+        }
+        return '0';
+      };
       return {
         width: calcWidth(),
         left: calcLeft()
+        // 'transition'
         // 'background-color': props.activeColor,
       };
     });
