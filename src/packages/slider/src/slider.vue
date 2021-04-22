@@ -14,14 +14,14 @@
         <div
           class="slider-move-btn-left"
           v-if="range"
-          @touchstart.stop.prevent="touchStart($event, 0)"
+          @touchstart.stop.prevent="touchStart($event, 'min')"
           @touchmove.stop.prevent="touchMove"
           @touchend.stop.prevent="touchEnd"
           @click.stop
         ></div>
         <div
           class="slider-move-btn-right"
-          @touchstart.stop.prevent="touchStart($event, 1)"
+          @touchstart.stop.prevent="touchStart($event, 'max')"
           @touchmove.stop.prevent="touchMove"
           @touchend.stop.prevent="touchEnd"
           @touchcancel.stop.prevent="touchEnd"
@@ -34,7 +34,7 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, onMounted, reactive, ref } from 'vue';
-import { TRect, TTouchType } from './type';
+import { TRect, TSliderValue, TTouchType } from './type';
 import { useTouch } from '@/util/touch';
 import { debounce } from '@/util/util';
 export default defineComponent({
@@ -84,6 +84,7 @@ export default defineComponent({
     const rect = ref<TRect>();
     const touch = useTouch();
     const scope = computed(() => Number(props.max) - Number(props.min));
+
     onMounted(() => {
       rect.value = content.value?.getBoundingClientRect()! as TRect;
     });
@@ -94,39 +95,46 @@ export default defineComponent({
       };
     });
 
-    const emitValue = (value: number) => {
-      value = formatValue(value);
-      if (props.range) {
-        if (props.minValue > props.maxValue) {
-          emit('update:minValue', props.maxValue);
-          console.log(value);
-          
-          emit('update:maxValue', value);
-          currTouchType = 1;
-          // currTouchType = 1;
-          // startRangeValue[currTouchType] = props.minValue;
-          // emit(
-          //   currTouchType === 0 ? 'update:maxValue' : 'update:minValue',
-          //   value
-          // );
-          return;
-        }
-        emit(
-          currTouchType === 0 ? 'update:minValue' : 'update:maxValue',
-          value
-        );
-        return;
+    const emitValue = (value: number | TSliderValue) => {
+      // value = formatValue(value);
+      // if (props.range) {
+      //   if (props.minValue > props.maxValue) {
+      //   }
+      //   emit(
+      //     currTouchType === 0 ? 'update:minValue' : 'update:maxValue',
+      //     value
+      //   );
+      //   return;
+      // }
+      if (typeof value === 'number') {
+        emit('update:modelValue', formatValue(value));
+      } else if (props.range) {
+        emit('update:minValue', formatValue(value.min));
+        emit('update:maxValue', formatValue(value.max));
       }
-      emit('update:modelValue', value);
     };
 
     const onClick = (event: MouseEvent) => {
       if (props.disabled) {
         return;
       }
-      const value = event.clientX - rect.value!.left;
+      let value = event.clientX - rect.value!.left;
+      value = props.min + (value / rect.value!.width) * scope.value;
       if (!props.range) {
-        emitValue(props.min + (value / rect.value!.width) * scope.value);
+        emitValue(value);
+      } else {
+        const { maxValue, minValue } = props;
+        if (value <= (minValue + maxValue) / 2) {
+          emitValue({
+            min: value,
+            max: maxValue
+          });
+        } else {
+          emitValue({
+            min: minValue,
+            max: value
+          });
+        }
       }
     };
 
@@ -135,18 +143,24 @@ export default defineComponent({
       return Math.round(value / props.step) * props.step;
     };
     let startValue: number = 0;
-    let startRangeValue: number[] = [];
-    let currTouchType = 1;
+    let currValue:number | TSliderValue;
+    const startRangeValue = { min: 0, max: 0 };
+    let currTouchType: TTouchType = 'min';
 
-    const touchStart = (event: TouchEvent, touchType: number) => {
+    const touchStart = (event: TouchEvent, touchType: TTouchType) => {
       if (props.disabled) return;
       currTouchType = touchType;
       touch.start(event);
       if (props.range) {
         startRangeValue[currTouchType] = formatValue(
-          props[currTouchType === 0 ? 'minValue' : 'maxValue']
+          props[currTouchType === 'min' ? 'minValue' : 'maxValue']
         );
+        currValue = {
+          min: props.minValue,
+          max: props.maxValue
+        };
       } else {
+        currValue = props.modelValue;
         startValue = formatValue(props.modelValue);
       }
     };
@@ -155,14 +169,12 @@ export default defineComponent({
       touch.move(event);
       const touchX = touch.touchX.value;
       const offset = (touchX / rect.value!.width) * scope.value;
-      let value = (startValue as number) + offset;
       if (props.range) {
-        // startRangeValue[currTouchType] =
-        //   startRangeValue[currTouchType] + offset;
-        value = startRangeValue[currTouchType] + offset;
+        currValue = startRangeValue[currTouchType] + offset;
+      }else{
+        currValue = startValue + offset
       }
-      emitValue(value);
-      // debounce(emitValue, 100)(value);
+      emitValue(currValue);
     };
     const touchEnd = () => {};
 

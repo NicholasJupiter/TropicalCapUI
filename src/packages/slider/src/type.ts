@@ -7,3 +7,5 @@ export type TRect = {
   height: 0;
 };
 export type TTouchType = 'min' | 'max';
+
+export type TSliderValue = { min: number; max: number };
