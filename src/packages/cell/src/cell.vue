@@ -1,7 +1,7 @@
 <template>
   <div class="cap-cell">
     <slot name="leading"></slot>
-    <div class="cell-content" :style="{ 'margin-left': slots.before && '16px' }">
+    <div class="cell-content" :style="{ 'margin-left': slots.leading && '16px' }">
       <div class="cell__content">
         <slot></slot>
       </div>
@@ -25,29 +25,5 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-.cap-cell {
-  display: flex;
-  align-items: center;
-  padding-left: 16px;
-  min-height: 48px;
-  cursor: pointer;
-  
-  .cell-content {
-    display: flex;
-    align-items: center;
-    min-height: 48px;
-    height: 100%;
-    flex: 1;
-    padding-right: 16px;
-    border-bottom: 1px solid $color-font-color-0-1;
-
-    .cell__content {
-      font-size: 16px;
-      line-height: 1.5;
-    }
-    .cell__guide-text{
-      margin-left: auto;
-    }
-  }
-}
+@import './cell.scss';
 </style>

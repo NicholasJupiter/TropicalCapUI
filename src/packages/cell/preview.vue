@@ -18,14 +18,28 @@
 
   <cap-cell @click="handleClick">
     <template #leading>
-      <i class="eva eva-droplet" style="font-size: 24px"></i>
+      <cap-avatar bg-color="rgba(235, 235, 236, 1)"></cap-avatar>
     </template>
     <span>Content</span>
     <template #guide-text>
       <span style="color: #666">View</span>
     </template>
     <template #trailing>
-      <i class="eva eva-chevron-right-outline"></i>
+      <cap-icon icon="chevron-right-outline"></cap-icon>
+    </template>
+  </cap-cell>
+
+  
+  <cap-cell @click="handleClick">
+    <template #leading>
+      <cap-avatar src="https://s3-alpha.figma.com/profile/0355a457-cc67-44b8-b3a9-f3cfc12916fa"></cap-avatar>
+    </template>
+    <span>Content</span>
+    <template #guide-text>
+      <span style="color: #666">View</span>
+    </template>
+    <template #trailing>
+      <cap-icon icon="chevron-right-outline"></cap-icon>
     </template>
   </cap-cell>
 </template>
