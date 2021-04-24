@@ -1,11 +1,14 @@
 .cap-slider {
   padding: 0 16px;
+  display: flex;
+  align-items: center;
   .cap-slider__content {
     width: 100%;
     position: relative;
     background-color: $color-font-color-0-1;
     cursor: pointer;
     .cap-slide__range {
+      border-radius: inherit;
       position: absolute;
       height: 100%;
       background-color: $color-blue-7;
@@ -14,32 +17,89 @@
       .slider-move-btn-right {
         cursor: grab;
         position: absolute;
-        height: 100%;
       }
       .slider-move-btn-left {
         left: 0;
-        transform: translateX(-50%);
+        top: 50%;
+        transform: translate(-50%, -50%);
       }
       .slider-move-btn-right {
         right: 0;
-        transform: translateX(50%);
+        top: 50%;
+        transform: translate(50%, -50%);
       }
     }
   }
 
-  &--block {
+  .drag__number {
+    position: absolute;
+    top: -8px;
+    transform: translate(-30%, -100%);
+    text-align: center;
+    font-size: 0px;
+    user-select: none;
+    > .content {
+      @include text-style-regular-16-px-24-px;
+      color: white;
+      background-color: $color-font-color-1-0;
+      padding: 4px 14px;
+    }
+
+    use {
+      fill: $color-font-color-1-0;
+    }
+  }
+
+  &--simple {
     > .cap-slider__content {
       height: 24px;
+      border-radius: 4px;
+    }
+    .drag__number > .content {
       border-radius: 4px;
     }
 
     .slider-move-btn-left,
     .slider-move-btn-right {
       width: 24px;
+      height: 24px;
       border: 2px solid $color-blue-6;
       background-color: white;
       border-radius: 4px;
       box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.06), -2px 0px 3px rgba(35, 69, 190, 0.12);
+    }
+  }
+
+  &--round {
+    > .cap-slider__content {
+      height: 4px;
+      border-radius: 60px;
+    }
+    .drag__number > .content {
+      border-radius: 60px;
+    }
+
+    .slider-move-btn-left,
+    .slider-move-btn-right {
+      width: 24px;
+      height: 24px;
+      border: 2px solid $color-blue-6;
+      background-color: white;
+      border-radius: 60px;
+      box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.06), -2px 0px 3px rgba(35, 69, 190, 0.12);
+    }
+  }
+
+  &--disabled {
+    > .cap-slider__content {
+      .cap-slide__range {
+        background-color: $color-font-color-0-3;
+        .slider-move-btn-left,
+        .slider-move-btn-right {
+          border-color: $color-font-color-0-4;
+          box-shadow: -2px 0px 3px rgba(0, 0, 0, 0.06);
+        }
+      }
     }
   }
 }

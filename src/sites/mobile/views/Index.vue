@@ -22,6 +22,7 @@ export default defineComponent({
   > h3,
   > h4 {
     margin: 16px 0;
+    user-select: none;
   }
   > div + div {
     margin-top: 20px;

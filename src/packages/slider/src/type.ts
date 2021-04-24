@@ -6,6 +6,10 @@ export type TRect = {
   width: 0;
   height: 0;
 };
+export type TSliderType = 'simple' | 'round';
+
 export type TTouchType = 'min' | 'max';
 
 export type TSliderValue = { min: number; max: number };
+
+export type TSliderState = 'draging' | 'drag-start' | 'drag-end' | 'click';
