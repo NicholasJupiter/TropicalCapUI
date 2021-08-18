@@ -7,29 +7,36 @@
   border: 1px solid transparent;
   transition: opacity 0.2s;
   -webkit-appearance: none;
+  overflow: hidden;
 
   .cap-button__content {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
+    @include text-style-regular-14-px-22-px;
   }
 
   &--default {
     background-color: $color-blue-5;
+    border-color: $color-blue-5;
   }
   &--assistant {
     background-color: $color-blue-7;
+    border-color: $color-blue-7;
   }
   &--secondary {
     background-color: $color-blue-10;
     color: $color-blue-6;
+    border-color:  $color-blue-10;
   }
   &--success {
     background-color: $color-positive-5;
+    border-color:  $color-positive-5;
   }
   &--danger {
     background-color: $color-negative-5;
+    border-color:  $color-negative-5;
   }
 
   &--large {
@@ -55,30 +62,24 @@
 
   &--plain {
     background-color: white;
-    border: 1px solid;
 
     &.cap-button--default {
       color: $color-blue-5;
-      border-color: $color-blue-5;
     }
     &.cap-button--assistant {
       color: $color-blue-7;
-      border-color: $color-blue-7;
     }
     &.cap-button--secondary {
       color: $color-blue-10;
-      border-color: $color-blue-10;
     }
     &.cap-button--success {
       color: $color-positive-5;
-      border-color: $color-positive-5;
     }
     &.cap-button--danger {
       color: $color-negative-5;
-      border-color: $color-negative-5;
     }
   }
-  .round {
+  &.round {
     border-radius: 60px;
   }
   &::after {

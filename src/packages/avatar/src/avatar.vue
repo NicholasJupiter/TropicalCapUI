@@ -3,9 +3,10 @@
     <img :src="src" v-if="src" />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { computed, defineComponent, PropType } from 'vue';
 import { TAvatarSize } from './type';
+
 export default defineComponent({
   name: 'cap-avatar',
   props: {

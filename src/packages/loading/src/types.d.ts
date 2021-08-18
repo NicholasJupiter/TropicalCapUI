@@ -4,5 +4,5 @@ export type TLoadingOptions = Partial<{
   content: string | VNode;
   color: string;
   size: number;
-  mask: boolean;
+  modal: boolean;
 }>;

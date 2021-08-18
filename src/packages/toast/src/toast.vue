@@ -1,16 +1,18 @@
 <template>
-  <transition name="fade">
-    <div
-      class="cap-toast"
-      v-if="visibled"
-      :style="{
-        [options.location]: options.offset
-      }"
-      @click="handleClick"
-    >
-      <div class="cap-toast__content" ref="content"></div>
-    </div>
-  </transition>
+  <teleport to="body">
+    <transition name="fade">
+      <div
+        class="cap-toast"
+        v-if="visibled"
+        :style="{
+          [options.location]: options.offset
+        }"
+        @click="handleClick"
+      >
+        <div class="cap-toast__content" ref="content"></div>
+      </div>
+    </transition>
+  </teleport>
 </template>
 <script lang="ts">
 import {
@@ -23,7 +25,7 @@ import {
   ref,
   render
 } from 'vue';
-import { TToastOptions } from './types';
+import { TToastOptions } from './types.d';
 import '@/assets/styles/animation.scss';
 export default defineComponent({
   name: 'cap-toast',
@@ -52,7 +54,7 @@ export default defineComponent({
           if (typeof options.content === 'object') {
             vm = createVNode(options.content);
           } else {
-            vm = createVNode(h('span', options.content));
+            vm = createVNode(h('span', { innerHTML: options.content }));
           }
           render(vm, content.value!);
         }
@@ -85,25 +87,5 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-.cap-toast {
-  width: calc(100% - 32px);
-  height: 56px;
-  // padding: 0 16px;
-  display: flex;
-  align-items: center;
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  > .cap-toast__content {
-    width: 100%;
-    background-color: $color-page-mask-000;
-    box-shadow: 0px 8px 32px 0px rgba($color: #000000, $alpha: 0.2);
-    padding: 16px;
-    overflow: hidden;
-    font-size: 14px;
-    color: white;
-    border-radius: 6px;
-  }
-}
+@import './toast.scss';
 </style>

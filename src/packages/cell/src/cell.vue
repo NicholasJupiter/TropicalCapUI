@@ -5,7 +5,7 @@
       <div class="cell__content">
         <slot></slot>
       </div>
-      <div class="cell__guide-text">
+      <div class="cell__guide-text" :style="{ 'margin-right': slots.trailing && '8px' }">
         <slot name="guide-text"></slot>
       </div>
       <slot name="trailing"></slot>

@@ -42,6 +42,17 @@
       <cap-icon icon="chevron-right-outline"></cap-icon>
     </template>
   </cap-cell>
+  <h4>表单</h4>
+  
+  <cap-cell @click="handleClick">
+    <template #leading>
+      <i class="eva eva-droplet" style="font-size: 24px"></i>
+    </template>
+    <span>Content</span>
+    <template #trailing>
+      <cap-button size="small" type="assistant" round>Action</cap-button>
+    </template>
+  </cap-cell>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';

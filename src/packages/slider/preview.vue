@@ -3,7 +3,14 @@
   <cap-slider v-model="sliderValue"></cap-slider>
   <cap-slider v-model="sliderValue" type="round"></cap-slider>
 
-  <h4>提示</h4>
+  <h4>区间滑块</h4>
+  <cap-slider
+    v-model:minValue="minValue"
+    v-model:maxValue="maxValue"
+    range
+  ></cap-slider>
+
+  <h4>数值提示</h4>
   <cap-slider
     v-model="sliderValue"
     style="margin-top: 40px"
@@ -27,14 +34,7 @@
     tip-number
   ></cap-slider>
 
-  <h4>区间</h4>
-  <cap-slider
-    v-model:minValue="minValue"
-    v-model:maxValue="maxValue"
-    range
-  ></cap-slider>
-
-  <h4>设置步数</h4>
+  <h4>设置步长</h4>
   <cap-slider
     v-model:minValue="minValue"
     v-model:maxValue="maxValue"
@@ -51,6 +51,8 @@
     max="200"
     range
   ></cap-slider>
+  
+  <cap-slider v-model="sliderValue" min="20" max="200"></cap-slider>
 
   <h4>使用插槽</h4>
   <cap-slider v-model="sliderValue">

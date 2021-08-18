@@ -1,0 +1,22 @@
+
+.cap-toast {
+  width: calc(100% - 32px);
+  height: 56px;
+  // padding: 0 16px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  > .cap-toast__content {
+    width: 100%;
+    background-color: $color-page-mask-000;
+    box-shadow: 0px 8px 32px 0px rgba($color: #000000, $alpha: 0.2);
+    padding: 16px;
+    overflow: hidden;
+    font-size: 14px;
+    color: white;
+    border-radius: 6px;
+  }
+}

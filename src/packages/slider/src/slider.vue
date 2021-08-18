@@ -29,14 +29,14 @@
           @click.stop
         >
           <div class="drag__number" v-if="tipNumber">
-            <div class="content">{{ tipFormatter(minValue) }}</div>
+            <span class="content">{{ tipFormatter(minValue) }}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="13"
               height="8"
               viewBox="0 0 13 8"
             >
-              <use xlink:href="#slider-arrow-down" />
+              <use xlink:href="#slider-arrow" />
             </svg>
           </div>
         </div>
@@ -49,25 +49,24 @@
           @click.stop
         >
           <div class="drag__number" v-if="tipNumber">
-            <div class="content">{{
-              tipFormatter(modelValue || maxValue)
-            }}</div>
+            <span class="content">
+              {{ tipFormatter(modelValue || maxValue) }}
+            </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="13"
               height="8"
               viewBox="0 0 13 8"
             >
-              <use xlink:href="#slider-arrow-down" />
+              <use xlink:href="#slider-arrow" />
             </svg>
           </div>
         </div>
       </div>
     </div>
     <slot name="trailing"></slot>
-
     <svg style="display: none" xmlns="http://www.w3.org/2000/svg">
-      <symbol id="slider-arrow-down">
+      <symbol id="slider-arrow">
         <path
           d="M7.27611 7.04478L13 0H0L5.72389 7.04478C6.12408 7.53733 6.87592 7.53733 7.27611 7.04478Z"
         />
@@ -83,8 +82,10 @@ import {
   TSliderType,
   TSliderValue,
   TTouchType
-} from './type';
+} from './types';
 import { useTouch } from '@/util/touch';
+import arrow from '@/assets/svg/arrow.svg';
+
 export default defineComponent({
   name: 'cap-slider',
   props: {
@@ -291,6 +292,7 @@ export default defineComponent({
       classes,
       content,
       slots,
+      arrow,
       tipFormatter
     };
   }

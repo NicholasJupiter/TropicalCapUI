@@ -1,4 +1,4 @@
-# Toast 吐司弹窗
+# Toast 吐司提示
 
 ## 基本用法
 
@@ -34,4 +34,4 @@ proxy.$toast.show({
 | offset | 偏移位置 | string | `16px` | -
 | duration | 	展示时长(ms)，值为 0 时，toast 不会消失 | number | `2000` | -
 | showClose | 是否显示关闭按钮 | boolean | `false` | - 
-| clickFn | 点击事件 | (toastInstance) => void | `undefined` | - 
+| clickFn | 点击事件 | (toastInstance) => void | `null` | - 

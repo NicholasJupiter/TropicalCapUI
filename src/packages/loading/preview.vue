@@ -21,7 +21,7 @@ export default defineComponent({
     const custom = () => {
       proxy!.$loading.service({
         content: h('div', { style: 'color:red;' }, 'HTML代码段'),
-        mask: false
+        modal: false
       });
       setTimeout(() => {
         close();

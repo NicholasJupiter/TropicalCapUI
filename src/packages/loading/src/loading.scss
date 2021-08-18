@@ -1,0 +1,22 @@
+.cap-loading {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &.modal{
+    background-color: rgba($color: #000000, $alpha: .4);
+  }
+  > :deep(.loading-content) {
+    margin-top: 8px;
+    font-size: 16px;
+    display: block;
+    line-height: 24px;
+    color: #383b46;
+  }
+}

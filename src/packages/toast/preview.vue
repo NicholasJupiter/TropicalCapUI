@@ -1,8 +1,9 @@
 <template>
   <h4>基本用法</h4>
-  <cap-button @click="show">显示Toast</cap-button>
+  <cap-button @click="show" size="small">显示Toast</cap-button>
+  <cap-button @click="htmlShow" size="small">插入HTML</cap-button>
   <h4>使用虚拟DOM</h4>
-  <cap-button @click="customShow">插入DOM元素</cap-button>
+  <cap-button @click="customShow" size="small">插入虚拟DOM</cap-button>
 </template>
 <script lang="ts">
 import { defineComponent, getCurrentInstance, h } from 'vue';
@@ -22,7 +23,7 @@ export default defineComponent({
     };
     const customShow = () => {
       proxy!.$toast.show({
-        content: h('p', { style: 'color:red' }, '插入HTML代码'),
+        content: h('p', { style: 'color:red' }, '插入虚拟dom'),
         clickFn: (toast) => {
           console.log(toast);
         }
@@ -31,7 +32,15 @@ export default defineComponent({
     const onClick = () => {
       console.log('onclick toast');
     };
-    return { show, customShow, onClick };
+    const htmlShow = () =>{
+      proxy!.$toast.show({
+        content:`<p style="color:red">我是html</p>`,
+        clickFn: (toast) => {
+          console.log(toast);
+        }
+      });
+    }
+    return { show, customShow, onClick, htmlShow };
   }
 });
 </script>

@@ -6,6 +6,7 @@
   <cap-pin v-model="pinValue" :length="4"></cap-pin>
   <h4>隐藏输入信息</h4>
   <cap-pin v-model="pinValue" password></cap-pin>
+  <h4>禁用</h4>
   <cap-pin v-model="pinValue" password type="block" disabled></cap-pin>
 </template>
 <script lang="ts">

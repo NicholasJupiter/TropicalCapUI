@@ -1,7 +1,7 @@
 <template>
   <aside class="aside">
     <template v-for="(nav, name) in navs" :key="name">
-      <router-link class="slide-item" :to="name"> {{ firstUpCase(name) }} </router-link>
+      <router-link class="slide-item" :to="name"> {{ name }} </router-link>
     </template>
   </aside>
 </template>
@@ -15,12 +15,12 @@ export default defineComponent({
   setup(_props, ctx) {
     const navs = reactive<{}>(getComs());
 
-    const firstUpCase = (name: string) =>
-      name[0].toUpperCase() + name.substring(1);
+    // const firstUpCase = (name: string) =>
+    //   name[0].toUpperCase() + name.substring(1);
 
     return {
       navs,
-      firstUpCase
+      // firstUpCase
     };
   }
 });

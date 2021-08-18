@@ -1,0 +1,38 @@
+.cap-popover {
+  border-radius: 12px;
+  max-width: 280px;
+  width: 280px;
+  filter: drop-shadow(0px 6px 12px rgba(101, 101, 101, 0.25));
+  padding: 16px;
+  position: absolute;
+  z-index: 50;
+
+  &--black {
+    background-color: $color-page-mask-black-0-8;
+    color: $color-font-color-0-1;
+  }
+  &--white {
+    background-color: $color-page-mask-white-0-8;
+    color: $color-font-color-0-8;
+  }
+
+  &__header {
+    display: flex;
+    margin-bottom: 8px;
+    > .header__title {
+      margin-right: 16px;
+    }
+    > i {
+      color: $color-font-color-0-3;
+      margin-left: auto;
+    }
+  }
+  .cap-popover__footer {
+    text-align: right;
+    padding: 2px 0;
+  }
+}
+
+.cap-popover__reference{
+  display: inline-block;
+}

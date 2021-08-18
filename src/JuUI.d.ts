@@ -1,5 +1,5 @@
-import { TLoadingOptions } from 'pack/loading/src/types';
-import { TToastOptions } from './packages/toast/src/types';
+import { TLoadingOptions } from './packages/Loading/src/types.d';
+import { TToastOptions } from './packages/Toast/src/types.d';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -20,3 +20,17 @@ declare global {
     [name: string]: any;
   }
 }
+
+
+
+export type TRect = {
+  bottom: number;
+  left: number;
+  right: number;
+  top: number;
+  width: number;
+  height: number;
+};
+
+
+export type TObject = {[key:string]: any};
