@@ -3,9 +3,10 @@
   <cap-button @click="show" size="small">显示Toast</cap-button>
   <cap-button @click="htmlShow" size="small">插入HTML</cap-button>
   <h4>使用虚拟DOM</h4>
-  <cap-button @click="customShow" size="small">插入虚拟DOM</cap-button>
+  <cap-button @click="jsxShow" size="small">插入JSX</cap-button>
+  <cap-button @click="vnodeShow" size="small">插入虚拟DOM</cap-button>
 </template>
-<script lang="ts">
+<script lang="tsx">
 import { defineComponent, getCurrentInstance, h } from 'vue';
 export default defineComponent({
   name: 'cap-toast-preview',
@@ -21,26 +22,25 @@ export default defineComponent({
         }
       });
     };
-    const customShow = () => {
-      proxy!.$toast.show({
-        content: h('p', { style: 'color:red' }, '插入虚拟dom'),
-        clickFn: (toast) => {
-          console.log(toast);
-        }
-      });
+    const vnodeShow = () => {
+      proxy!.$toast.show(h('p', 'Vnode'));
+    };
+
+    const jsxShow = () => {
+      proxy!.$toast.show(<p style="color:red;">JSX</p>);
     };
     const onClick = () => {
       console.log('onclick toast');
     };
-    const htmlShow = () =>{
+    const htmlShow = () => {
       proxy!.$toast.show({
-        content:`<p style="color:red">我是html</p>`,
+        content: `<p style="color:red">我是html</p>`,
         clickFn: (toast) => {
           console.log(toast);
         }
       });
-    }
-    return { show, customShow, onClick, htmlShow };
+    };
+    return { show, jsxShow, vnodeShow, onClick, htmlShow };
   }
 });
 </script>

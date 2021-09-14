@@ -1,5 +1,5 @@
 import { TLoadingOptions } from './packages/Loading/src/types.d';
-import { TToastOptions } from './packages/Toast/src/types.d';
+import { TToastOptions } from './packages/toast/src/types';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -8,7 +8,7 @@ declare module '@vue/runtime-core' {
       close: () => void;
     };
     $toast: {
-      show: (options?: TToastOptions) => void;
+      show: (options?: TToastOptions | JSX.Element | VNode) => void;
       close: () => void;
     };
     [key: string]: any;
@@ -21,8 +21,6 @@ declare global {
   }
 }
 
-
-
 export type TRect = {
   bottom: number;
   left: number;
@@ -32,5 +30,4 @@ export type TRect = {
   height: number;
 };
 
-
-export type TObject = {[key:string]: any};
+export type TObject = { [key: string]: any };

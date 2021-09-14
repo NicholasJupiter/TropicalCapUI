@@ -30,7 +30,7 @@
     <slot></slot>
   </span>
 </template>
-<script lang="ts" name="cap-popover" setup>
+<script lang="ts" name="cap-popover">
 import {
   computed,
   defineComponent,

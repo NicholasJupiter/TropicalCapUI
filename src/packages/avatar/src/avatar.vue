@@ -3,7 +3,7 @@
     <img :src="src" v-if="src" />
   </div>
 </template>
-<script lang="ts" setup>
+<script lang="ts">
 import { computed, defineComponent, PropType } from 'vue';
 import { TAvatarSize } from './type';
 

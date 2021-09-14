@@ -2,9 +2,15 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import MD from 'vite-plugin-md';
+import VitePluginVueJSX from '@vitejs/plugin-vue-jsx';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  esbuild: {
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment',
+    jsxInject: "import { h } from 'vue';"
+  },
   base: '/ju3x/',
   resolve: {
     alias: {
@@ -27,7 +33,8 @@ export default defineConfig({
     vue({
       include: [/\.vue$/, /\.md$/]
     }),
-    MD()
+    MD(),
+    VitePluginVueJSX({})
   ],
   build: {
     target: 'es2015',
