@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import MD from 'vite-plugin-md';
 import VitePluginVueJSX from '@vitejs/plugin-vue-jsx';
+const hljs = require('highlight.js');
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,15 +26,41 @@ export default defineConfig({
       scss: {
         additionalData: `
         @import "@/assets/styles/default";
-        @import "@/assets/styles/variables";`
+        @import "@/assets/styles/variables";
+        @import "@/assets/styles/comm";`
       }
+    },
+    postcss: {
+      plugins: [
+        require('autoprefixer')({
+          overrideBrowserslist: [
+            '> 0.5%',
+            'last 2 versions',
+            'ie > 11',
+            'iOS >= 10',
+            'Android >= 5'
+          ]
+        })
+      ]
     }
   },
   plugins: [
     vue({
       include: [/\.vue$/, /\.md$/]
     }),
-    MD(),
+    MD({
+      markdownItOptions: {
+        highlight: function (str, lang) {
+          if (lang && hljs.getLanguage(lang)) {
+            try {
+              return hljs.highlight(lang, str).value;
+            } catch (__) {}
+          }
+
+          return ''; // 使用额外的默认转义
+        }
+      }
+    }),
     VitePluginVueJSX({})
   ],
   build: {

@@ -9,7 +9,7 @@
 }
 
 .zoom-enter-from,
-.zoom-leave-to{
+.zoom-leave-to {
   transform: scale(0);
 }
 
@@ -18,7 +18,7 @@
   transition: transform 0.2s ease;
 }
 
-@keyframes fadeIn{
+@keyframes fadeIn {
   0% {
     opacity: 0;
   }
@@ -27,7 +27,7 @@
   }
 }
 
-@keyframes fadeOut{
+@keyframes fadeOut {
   0% {
     opacity: 1;
   }

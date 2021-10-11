@@ -4,7 +4,7 @@
   "author": "Jupiter",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
@@ -21,10 +21,12 @@
     "@vitejs/plugin-vue-jsx": "^1.1.7",
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/compiler-sfc": "^3.0.5",
+    "autoprefixer": "^10.3.7",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.8.0",
+    "highlight.js": "^11.2.0",
     "prettier": "^2.2.1",
     "sass": "^1.32.8",
     "typescript": "^4.3.2",

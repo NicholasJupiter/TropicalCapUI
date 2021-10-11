@@ -6,23 +6,37 @@
 <cap-cell>Content</cap-cell>
 ```
 
-## 使用插槽
+## ICON&图片
 
 ```html
-<cap-cell>
+<cap-cell @click="handleClick">
   <template #leading>
-    <i class="eva eva-droplet" style="font-size:24px"></i>
+    <cap-icon icon="droplet" size="36px"></cap-icon>
   </template>
   <span>Content</span>
   <template #guide-text>
-    <span style="color:#666;">View</span>
+    <span style="color: #666">View</span>
   </template>
-  <template #trailing>
-    <i class="eva eva-chevron-right-outline"></i>
+</cap-cell>
+```
+
+## 链接
+
+```html
+<cap-cell @click="handleClick" is-link>
+  <span>跳转</span>
+  <template #guide-text>
+    <span style="color: #666">view</span>
   </template>
 </cap-cell>
 ```
 ## API
+
+### Props
+
+| 参数 | 说明 | 类型 | 默认值 | 版本
+| --- | --- | --- | ----    | ----
+| is-link | 是否展示右侧箭头 并点击反馈 | boolean | `false` | -
 
 ### Slots
 
@@ -30,5 +44,5 @@
 |  ----  | ----  | -
 | default | 内容展示区域 | -
 | leading | 领导内容 | -
-| guide-text  | 辅助文字 | -
+| guide-text  | 辅助内容 | -
 | trailing  | 尾部内容 | -

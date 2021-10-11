@@ -24,8 +24,5 @@ export default defineComponent({
     margin: 16px 0;
     user-select: none;
   }
-  > div + div {
-    margin-top: 20px;
-  }
 }
 </style>

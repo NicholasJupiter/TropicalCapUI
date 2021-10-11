@@ -1,0 +1,35 @@
+@mixin position-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// border start 
+$border-poses: top, right, bottom, left;
+$border-color: #eee;
+@mixin border-1px($color: $border-color, $poses: $border-poses) {
+  position: relative;
+  &::after {
+    pointer-events: none;
+    content: '';
+    display: block;
+    position: absolute;
+    
+    @each $pos in $poses {
+      border-#{$pos}: 1px solid $color;
+      #{$pos}: 0;
+    }
+    @if $poses == 'top' or $poses == 'bottom' {
+      left: 0;
+      right: 0;
+      transform: scaleY(0.5);
+    }
+    @if $poses == 'left' or $poses == 'right' {
+      top: 0;
+      bottom: 0;
+      transform: scaleX(0.5);
+    }
+  }
+}
+// border end

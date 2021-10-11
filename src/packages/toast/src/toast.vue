@@ -22,8 +22,7 @@ import {
   nextTick,
   reactive,
   ref,
-  render,
-  toRefs
+  render
 } from 'vue';
 import type { VNode } from 'vue';
 import type { TToastOptions } from './types.d';
@@ -36,7 +35,7 @@ const options = reactive<TToastOptions>({
   duration: 2000,
   showClose: false
 });
-const timeout = ref(0);
+let timeout = 0;
 const visibled = ref(false);
 const contentRef = ref(null);
 
@@ -44,62 +43,57 @@ const contentRef = ref(null);
 const show = (_options: TToastOptions | string | VNode | JSX.Element) => {
   _clearTimeout();
   visibled.value = true;
-  let vm = null;
+  options?.showFn && options.showFn(instance!);
   if (typeof _options === 'object') {
-    // jsx
-    if ((_options as any).__v_isVNode) {
-      vm = createVNode(_options);
+    // vnode || jsx
+    if ((_options as VNode).type) {
+      renderContext(_options as VNode);
+    } else {
+      // options
+      Object.assign(options, _options);
+      renderContext(options.content || '');
     }
-    console.log(_options);
   } else {
-    options.content = _options;
+    // content
+    renderContext(_options);
   }
-  console.log(_options);
-  render(vm, contentRef.value!);
-  setTimeout(()=>{
+  timeout = setTimeout(() => {
     close();
   }, options.duration);
-  close();
-  return;
+};
+/**
+ * 渲染内容
+ */
+const renderContext = (content: string | VNode | JSX.Element) => {
   nextTick(() => {
     // 创建DOM
-    if (options.content && contentRef.value) {
+    if (content && contentRef.value) {
       let vm = null;
-      if (typeof options.content === 'object') {
-        vm = createVNode(options.content);
+      if (typeof content === 'object') {
+        vm = createVNode(content);
       } else {
         vm = createVNode(h('span', options.content));
       }
       render(vm, contentRef.value!);
     }
-    close();
   });
 };
-
-const renderContext = () => {};
 
 // 关闭
 const close = () => {
   visibled.value = false;
-  if (options.duration) {
-    timeout.value = setTimeout(() => {
-      visibled.value = false;
-      _clearTimeout();
-    }, options.duration);
-  }
+  _clearTimeout();
+  options?.closeFn && options.closeFn(instance!);
 };
-
+// 清楚定时器
 const _clearTimeout = () => {
-  timeout.value && window.clearTimeout(timeout.value);
-  timeout.value = 0;
+  timeout && window.clearTimeout(timeout);
+  timeout = 0;
 };
-
+// 处理点击事件
 const handleClick = () => {
-  if (options?.clickFn) {
-    options.clickFn(instance!);
-  }
+  options?.clickFn && options.clickFn(instance!);
 };
-
 </script>
 <style lang="scss" scoped>
 @import './toast.scss';

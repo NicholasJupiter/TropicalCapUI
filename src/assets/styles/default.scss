@@ -4,7 +4,8 @@
   margin: 0;
   border: 0;
   box-shadow: none;
-  font-family: PingFang SC, Microsoft YaHei, Helvetica, Hiragino Sans GB, SimSun, sans-serif;
+  font-family: PingFang SC, Microsoft YaHei, Helvetica, Hiragino Sans GB, SimSun,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -19,7 +20,7 @@ input {
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
-  &[type="number"] {
+  &[type='number'] {
     -moz-appearance: textfield;
   }
 }

@@ -1,4 +1,4 @@
-export type TSize = 'large' | 'small' | 'mini';
+export type TSize = 'large' | 'small' | 'medium';
 export type TType =
   | 'primary'
   | 'default'
