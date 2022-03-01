@@ -9,9 +9,9 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import DocAside from 'docs/components/layout/Aside.vue';
-import DocContent from 'docs/components/layout/Content.vue';
-import DocHeader from 'docs/components/layout/Header.vue';
+import DocAside from '@docs/components/layout/Aside.vue';
+import DocContent from '@docs/components/layout/Content.vue';
+import DocHeader from '@docs/components/layout/Header.vue';
 
 export default defineComponent({
   name: 'index',

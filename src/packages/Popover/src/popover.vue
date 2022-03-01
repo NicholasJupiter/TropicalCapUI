@@ -1,100 +1,163 @@
 <template>
-  <teleport to="body">
-    <transition name="zoom">
-      <div
-        class="cap-popover"
-        :class="classes"
-        v-show="!disabled && showPopover"
-        :style="popoverStyle"
-        ref="popover"
-      >
-        <div class="cap-popover__header">
-          <span class="header__title" v-html="title"></span>
-          <cap-icon icon="close" @click="showPopover = false"></cap-icon>
-        </div>
-        <slot name="content"></slot>
-        <div
-          class="cap-popover__footer"
-          :style="{ paddingTop: slots.footer && '16px' }"
-        >
-          <slot name="footer"></slot>
-        </div>
-      </div>
-    </transition>
-  </teleport>
-  <span
-    class="cap-popover__reference"
-    @click="showPopover = !showPopover"
-    ref="reference"
-  >
-    <slot></slot>
+  <!-- 内容 -->
+  <span class="cap-popover__reference" @click="change" ref="reference">
+    <slot ref="reference"></slot>
   </span>
+  <!-- 弹窗 -->
+  <teleport to="body">
+    <div class="cap-popover" :class="popoverClasses" ref="popover">
+      <transition name="zoom">
+        <div v-show="!disabled && visibled" class="cap-popover__content">
+          <div class="cap-popover__header">
+            <span class="header__title" v-html="title"></span>
+            <cap-icon icon="close" @click="change"></cap-icon>
+          </div>
+          <slot name="content"></slot>
+          <div
+            class="cap-popover__footer"
+            :style="{ paddingTop: slots.footer && '16px' }"
+          >
+            <slot name="footer"></slot>
+          </div>
+          <cap-icon
+            data-popper-arrow
+            icon="arrow-down"
+            class="cap-popover__arrow"
+            size="large"
+          ></cap-icon>
+        </div>
+      </transition>
+    </div>
+  </teleport>
 </template>
-<script lang="ts" name="cap-popover">
+<script lang="tsx">
+const name = 'cap-popover';
+export default { name };
+</script>
+<script lang="tsx" setup>
 import {
   computed,
-  defineComponent,
+  nextTick,
   onMounted,
   PropType,
-  reactive,
   ref,
-  watch
+  useSlots,
+  watchEffect
 } from 'vue';
-import { TPlacement, TPopoverType } from './types';
-import { updatePopper } from '@/util/popper';
+import { TPopoverTheme } from './types';
 import '@/assets/styles/animation.scss';
+import { createPopper, Instance, Modifier, Placement } from '@popperjs/core';
 
-export default defineComponent({
-  name: 'cap-popover',
-  props: {
-    type: {
-      type: String as PropType<TPopoverType>,
-      default: 'black'
-    },
-    placement: {
-      type: String as PropType<TPlacement>,
-      default: 'top'
-    },
-    title: String,
-    disabled: Boolean
+const props = defineProps({
+  visibled: {
+    type: Boolean,
+    default: false
   },
-  emits: ['show', 'hide'],
-  setup(props, { emit, slots }) {
-    const name = 'cap-popover';
-    const showPopover = ref(false);
-    const reference = ref<HTMLElement>();
-    const popover = ref<HTMLElement>();
-    const popoverStyle = reactive({
-      top: '50%',
-      left: '50%',
-      transformOrigin: 'top center'
-    });
+  theme: {
+    type: String as PropType<TPopoverTheme>,
+    default: 'light',
+    validator: (v: TPopoverTheme) => ['light', 'dark'].includes(v)
+  },
+  placement: {
+    type: String as PropType<Placement>,
+    default: 'auto'
+  },
+  title: String,
+  offset: {
+    type: Array as PropType<number[]>,
+    default: () => [0, 16],
+    validator: (v: number[]) => v.length === 2
+  },
+  popoverClass: {
+    type: String,
+    default: ''
+  },
+  popoverModifiers: {
+    type: Array as PropType<Modifier<any, any>[]>,
+    default: () => []
+  },
+  disabled: Boolean
+});
 
-    onMounted(() => {
-      Object.assign(
-        popoverStyle,
-        updatePopper(reference.value!, popover.value!, {
-          placement: props.placement
-        })
-      );
-      console.log(popoverStyle);
-      
-    });
+const visibled = ref(props.visibled);
 
-    watch(showPopover, (val) => {
-      if (!props.disabled) return;
-      emit(val ? 'show' : 'hide');
-    });
+const emit = defineEmits(['change', 'update:visibled']);
+const slots = useSlots();
+const reference = ref<HTMLElement>();
+const popover = ref<HTMLElement>();
+let popper: Instance | null = null;
 
-    const classes = computed(() => {
-      return {
-        [`${name}--${props.type}`]: true
-      };
+watchEffect(() => {
+  visibled.value = props.visibled;
+});
+watchEffect(() => {
+  emit('update:visibled', visibled.value);
+  emit('change', visibled.value);
+  if (popper && visibled.value) {
+    nextTick(() => {
+      popper!.update();
     });
-    return { classes, showPopover, slots, popoverStyle, reference, popover };
   }
+});
+onMounted(() => {
+  popper = createPopper(reference.value!, popover.value!, {
+    placement: props.placement,
+    modifiers: [
+      { name: 'arrow', options: {} },
+      {
+        name: 'flip',
+        options: {
+          // boundary: document.body,
+          // flipVariations: false,
+          padding: 8,
+          altBoundary: true
+          // fallbackPlacements: ['top', 'right', 'left', 'bottom']
+        }
+      },
+      {
+        name: 'preventOverflow',
+        options: {
+          // altBoundary: true,
+          padding: 8
+          // altAxis: true
+        }
+      },
+      {
+        name: 'offset',
+        options: {
+          offset: props.offset
+        }
+      },
+      {
+        name: 'computeStyles',
+        options: {
+          gpuAcceleration: false
+        }
+      },
+      ...props.popoverModifiers
+    ]
+  });
+});
+
+function change() {
+  if (props.disabled) return;
+  visibled.value = !visibled.value;
+}
+
+const popoverClasses = computed(() => {
+  return {
+    [`${name}--${props.theme}`]: true,
+    [props.popoverClass]: true
+  };
 });
 </script>
 <style lang="scss" scoped>
 @import './popover.scss';
+</style>
+<style lang="scss">
+.cap-popover {
+  h3 {
+    font-size: 14px;
+  }
+}
 </style>

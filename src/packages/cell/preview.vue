@@ -8,9 +8,6 @@
       <cap-icon icon="droplet" size="36px"></cap-icon>
     </template>
     <span>Content</span>
-    <template #guide-text>
-      <span style="color: #666">view</span>
-    </template>
     <template #trailing>
       <cap-icon icon="chevron-right-outline" size="24px"></cap-icon>
     </template>
@@ -24,7 +21,7 @@
       </cap-avatar>
     </template>
     <span>Content</span>
-    <template #guide-text>
+    <template #trailing>
       <span style="color: #666">view</span>
     </template>
   </cap-cell>
@@ -32,7 +29,7 @@
   <h4>链接</h4>
   <cap-cell @click="handleClick" is-link>
     <span>跳转</span>
-    <template #guide-text>
+    <template #trailing>
       <span style="color: #666">view</span>
     </template>
   </cap-cell>

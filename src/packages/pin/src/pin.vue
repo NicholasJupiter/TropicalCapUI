@@ -28,63 +28,66 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
+<script lang="tsx">
+const name = 'cap-pin';
+export default { name };
+</script>
+<script lang="tsx" setup>
+import { PropType, ref } from 'vue';
 import { TPinType } from './types';
 import '@/assets/styles/animation.scss';
-export default defineComponent({
-  name: 'cap-pin',
-  props: {
-    modelValue: {
-      type: String,
-      require: true
-    },
-    length: {
-      type: Number,
-      default: 6,
-      validator: (val: number) => val >= 4 && val <= 6
-    },
-    password: {
-      type: Boolean,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    type: {
-      type: String as PropType<TPinType>,
-      default: 'basic'
-    }
+
+const data = ref({
+  data:1
+})
+console.log(data);
+const props = defineProps({
+  modelValue: {
+    type: String,
+    require: true
   },
-  emits: ['change', 'update:modelValue'],
-  setup(props, ctx) {
-    const realInput = ref<HTMLInputElement>();
-    const isFocus = ref(false);
-    const onBlur = () => {
-      isFocus.value = false;
-    }
-
-    const onFocus = () => {
-      isFocus.value = true;
-    }
-
-    const handleClick = () => {
-      realInput.value?.focus();
-    };
-    const valueChange = (e: InputEvent) => {
-      const target = e.target as HTMLInputElement;
-      const len = target.value.length;
-      if (len > props.length) {
-        target.value.slice(0, props.length);
-      }
-      ctx.emit('update:modelValue', target.value);
-      ctx.emit('change', target.value);
-    };
-
-    return { valueChange, realInput, handleClick, onBlur, onFocus, isFocus };
+  length: {
+    type: Number,
+    default: 6,
+    validator: (val: number) => val >= 4 && val <= 6
+  },
+  password: {
+    type: Boolean,
+    default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  type: {
+    type: String as PropType<TPinType>,
+    default: 'basic'
   }
 });
+const emit = defineEmits(['change', 'update:modelValue']);
+
+const realInput = ref<HTMLInputElement>();
+const isFocus = ref(false);
+const onBlur = () => {
+  isFocus.value = false;
+};
+
+const onFocus = () => {
+  isFocus.value = true;
+};
+
+const handleClick = () => {
+  realInput.value?.focus();
+};
+const valueChange = (e: InputEvent) => {
+  const target = e.target as HTMLInputElement;
+  const len = target.value.length;
+  if (len > props.length) {
+    target.value.slice(0, props.length);
+  }
+  emit('update:modelValue', target.value);
+  emit('change', target.value);
+};
 </script>
 <style lang="scss" scoped>
 @import './pin.scss';

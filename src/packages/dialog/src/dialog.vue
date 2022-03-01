@@ -1,16 +1,13 @@
 <template>
   <div class="cap-dialog"> </div>
 </template>
-<script lang="ts">
-import { defineComponent, reactive } from 'vue';
-export default defineComponent({
-  name: 'cap-dialog',
-  props: {},
-  emits: [],
-  setup(props, ctx) {
-    const options = reactive<{}>({});
-    return { options };
-  }
-});
+<script lang="tsx">
+const name = 'cap-dialog';
+export default { name };
+</script>
+<script lang="tsx" setup>
+import { reactive } from 'vue';
+
+const options = reactive<{}>({});
 </script>
 <style lang="scss" scoped></style>

@@ -16,9 +16,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve('./src'),
-      docs: resolve('./src/sites/docs'),
-      mobile: resolve('./src/sites/mobile'),
-      pack: resolve('./src/packages')
+      '@docs': resolve('./src/sites/docs'),
+      '@mobile': resolve('./src/sites/mobile'),
+      '@p': resolve('./src/packages')
     }
   },
   css: {

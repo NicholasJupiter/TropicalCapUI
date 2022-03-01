@@ -1,26 +1,19 @@
 <template>
   <teleport to="body">
-    
     <transition name="fain-bottom">
-      <div class="cap-action-sheet" v-if="visibled" :class="classes">
-
-      </div>
+      <div class="cap-action-sheet" v-if="visibled" :class="classes"> </div>
     </transition>
   </teleport>
 </template>
-<script lang="ts">
-import { computed, defineComponent } from 'vue';
-export default defineComponent({
-  name: 'cap-actionSheet',
-  props: {},
-  emits: [],
-  setup(props, ctx) {
-    const classes = computed(()=>{
-      return {
-      }
-    })
-    return {classes};
-  }
+
+<script lang="tsx">
+const name = 'cap-action-sheet';
+export default { name };
+</script>
+<script lang="tsx" setup>
+import { computed } from 'vue';
+const classes = computed(() => {
+  return {};
 });
 </script>
 <style lang="scss" scoped>

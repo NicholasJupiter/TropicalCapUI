@@ -21,7 +21,6 @@
 ```html
 <cap-slider
   v-model="sliderValue"
-  style="margin-top: 40px"
   tip-number
 ></cap-slider>
 
@@ -29,14 +28,12 @@
   v-model:minValue="minValue"
   v-model:maxValue="maxValue"
   range
-  style="margin-top: 60px"
   type="round"
   tip-number
 ></cap-slider>
 
 <cap-slider
   v-model="sliderValue"
-  style="margin-top: 60px"
   :tip-formatter="(val) => val + '%'"
   tip-number
 ></cap-slider>

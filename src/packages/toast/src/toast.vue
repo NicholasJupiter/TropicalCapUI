@@ -3,7 +3,7 @@
     <transition name="fade">
       <div
         class="cap-toast"
-        v-show="visibled"
+        v-if="visibled"
         :style="{
           [options.location]: options.offset
         }"
@@ -14,6 +14,10 @@
     </transition>
   </teleport>
 </template>
+<script lang="tsx">
+const name = 'cap-toast';
+export default { name };
+</script>
 <script lang="tsx" name="cap-toast" setup>
 import {
   createVNode,
@@ -24,8 +28,8 @@ import {
   ref,
   render
 } from 'vue';
-import type { VNode } from 'vue';
-import type { TToastOptions } from './types.d';
+import { VNode } from 'vue';
+import { TToastOptions } from './types.d';
 import '@/assets/styles/animation.scss';
 
 const instance = getCurrentInstance();
@@ -51,7 +55,7 @@ const show = (_options: TToastOptions | string | VNode | JSX.Element) => {
     } else {
       // options
       Object.assign(options, _options);
-      renderContext(options.content || '');
+      renderContext(options.content as string);
     }
   } else {
     // content
@@ -72,7 +76,7 @@ const renderContext = (content: string | VNode | JSX.Element) => {
       if (typeof content === 'object') {
         vm = createVNode(content);
       } else {
-        vm = createVNode(h('span', options.content));
+        vm = createVNode(<span innerHTML={content}></span>);
       }
       render(vm, contentRef.value!);
     }

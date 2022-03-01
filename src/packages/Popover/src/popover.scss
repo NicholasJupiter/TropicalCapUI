@@ -1,19 +1,61 @@
 .cap-popover {
-  border-radius: 12px;
-  max-width: 280px;
-  width: 280px;
-  filter: drop-shadow(0px 6px 12px rgba(101, 101, 101, 0.25));
-  padding: 16px;
   position: absolute;
   z-index: 50;
 
-  &--black {
-    background-color: $color-page-mask-black-0-8;
-    color: $color-font-color-0-1;
+  $poses: (
+    top: bottom,
+    bottom: top,
+    left: right,
+    right: left,
+  );
+
+  @each $pose, $value in $poses {
+    &[data-popper-placement^="#{$pose}"] {
+      &.cap-popover--dark {
+        .cap-popover__arrow {
+          color: rgba($color: black, $alpha: 0.9);
+        }
+      }
+
+      &.cap-popover--light {
+        .cap-popover__arrow {
+          color: rgba($color: white, $alpha: 0.9);
+        }
+      }
+
+      .cap-popover__arrow {
+        #{$value}: -18px;
+        @if $pose == "bottom" {
+          transform: rotate(180deg);
+        } @else if $pose == "left" {
+          transform: rotate(-90deg);
+        } @else if $pose == "right" {
+          transform: rotate(90deg);
+        }
+      }
+    }
   }
-  &--white {
-    background-color: $color-page-mask-white-0-8;
-    color: $color-font-color-0-8;
+  > .cap-popover__content {
+    width: 280px;
+    filter: drop-shadow(0px 6px 12px rgba(101, 101, 101, 0.25));
+    backdrop-filter: blur(10px);
+    padding: 16px;
+    border-radius: 12px;
+    max-width: 280px;
+  }
+
+  &--dark {
+    > .cap-popover__content {
+      background-color: $color-page-mask-black-0-8;
+      color: $color-font-color-0-1;
+    }
+  }
+
+  &--light {
+    > .cap-popover__content {
+      background-color: $color-page-mask-white-0-8;
+      color: $color-font-color-0-8;
+    }
   }
 
   &__header {
@@ -25,14 +67,20 @@
     > i {
       color: $color-font-color-0-3;
       margin-left: auto;
+      cursor: pointer;
+
+      &:active {
+        opacity: 0.6;
+      }
     }
   }
   .cap-popover__footer {
     text-align: right;
     padding: 2px 0;
   }
-}
 
-.cap-popover__reference{
-  display: inline-block;
+  &[data-popper-reference-hidden] {
+    visibility: hidden;
+    pointer-events: none;
+  }
 }

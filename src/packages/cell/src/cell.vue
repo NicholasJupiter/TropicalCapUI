@@ -8,15 +8,8 @@
       <div class="cell__content">
         <slot></slot>
       </div>
-      <div
-        class="cell__guide-text"
-        :style="{ 'margin-right': slots.trailing && '8px' }"
-      >
-        <slot name="guide-text"></slot>
-      </div>
-      <slot name="trailing">
-        <cap-icon icon="chevron-right-outline" v-if="props.isLink"></cap-icon>
-      </slot>
+      <slot name="trailing"> </slot>
+      <cap-icon icon="chevron-right-outline" v-if="props.isLink"></cap-icon>
     </div>
   </div>
 </template>
@@ -36,7 +29,6 @@ const props = defineProps({
 
 const slots = useSlots();
 const classes = { [name + '--clickable']: props.isLink };
-console.log(classes);
 </script>
 
 <style lang="scss" scoped>

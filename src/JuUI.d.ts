@@ -1,5 +1,5 @@
 import { TLoadingOptions } from './packages/Loading/src/types.d';
-import { TToastOptions } from './packages/toast/src/types';
+import { TToastOptions } from './packages/Toast/src/types';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -8,7 +8,7 @@ declare module '@vue/runtime-core' {
       close: () => void;
     };
     $toast: {
-      show: (options?: TToastOptions | JSX.Element | VNode) => void;
+      show: (options?: TToastOptions | JSX.Element | VNode | string) => void;
       close: () => void;
     };
     [key: string]: any;

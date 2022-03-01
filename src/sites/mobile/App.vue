@@ -18,7 +18,7 @@ export default defineComponent({
     watch(
       () => route,
       () => {
-        const { hash } = window.top.location;
+        const { hash } = window!.top!.location;
         if (route.hash != hash) {
           title.value = route.name as string;
         } else {

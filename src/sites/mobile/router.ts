@@ -13,7 +13,7 @@ for (const path in previews) {
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import('mobile/views/Index.vue'),
+    component: () => import('@mobile/views/Index.vue'),
     children
   }
 ];

@@ -22,9 +22,10 @@ export function install(
   component: DefineComponent<{}, {}, any>,
   call?: (Vue: App, component: DefineComponent<{}, {}, any>) => void
 ) {
-  component.install = function (Vue: App) {
-    Vue.component(component.name, component);
-    call && call(Vue, component);
+  return {
+    install: function (Vue: App) {
+      Vue.component(component.name, component);
+      call && call(Vue, component);
+    }
   };
-  return component;
 }

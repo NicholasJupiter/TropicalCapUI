@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import Ju from '../../Ju';
+import CapUi from '@p/index';
 import router from './router';
 
 // const modules = import.meta.glob('./packages/*/index.ts');
@@ -14,6 +14,6 @@ import router from './router';
 const app = createApp(App);
 // app.config.globalProperties.packages = components;
 
-app.use(Ju);
+app.use(CapUi);
 app.use(router);
 app.mount('#app');

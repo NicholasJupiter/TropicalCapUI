@@ -17,10 +17,10 @@ export default defineComponent({
 <style lang="scss">
 .preview-content {
   padding: 10px 10px;
-  > h1,
-  > h2,
-  > h3,
-  > h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     margin: 16px 0;
     user-select: none;
   }

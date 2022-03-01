@@ -1,4 +1,4 @@
-export type TPopoverType = 'black' | 'white';
+export type TPopoverTheme = 'light' | 'dark';
 
 export type TPlacement =
   | 'top'
@@ -13,4 +13,3 @@ export type TPlacement =
   | 'bottom'
   | 'bottom-start'
   | 'bottom-end';
-

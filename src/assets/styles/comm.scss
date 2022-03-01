@@ -5,27 +5,27 @@
   transform: translate(-50%, -50%);
 }
 
-// border start 
+// border start
 $border-poses: top, right, bottom, left;
 $border-color: #eee;
 @mixin border-1px($color: $border-color, $poses: $border-poses) {
   position: relative;
   &::after {
     pointer-events: none;
-    content: '';
+    content: "";
     display: block;
     position: absolute;
-    
+
     @each $pos in $poses {
       border-#{$pos}: 1px solid $color;
       #{$pos}: 0;
     }
-    @if $poses == 'top' or $poses == 'bottom' {
+    @if $poses == "top" or $poses == "bottom" {
       left: 0;
       right: 0;
       transform: scaleY(0.5);
     }
-    @if $poses == 'left' or $poses == 'right' {
+    @if $poses == "left" or $poses == "right" {
       top: 0;
       bottom: 0;
       transform: scaleX(0.5);
@@ -33,3 +33,20 @@ $border-color: #eee;
   }
 }
 // border end
+
+// 三角形
+$border-width: 1px;
+$border-style: solid;
+// @params {$poses} 位置
+// @params {$width} 宽度
+// @params {$color} 颜色
+// @params {$border-style-temp} 样式 
+@mixin border-angle(
+  $poses: $border-poses,
+  $width: $border-width,
+  $color: $border-color,
+  $border-style-temp: $border-style
+) {
+  border: transparent $width solid;
+  border-#{$poses}: $width $color $border-style-temp;
+}

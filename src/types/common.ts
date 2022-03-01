@@ -1,1 +1,3 @@
-export type TKeyValue = { [name: number | string | symbol]: any };
+export type TKeyValue = {
+  [name in number | string]: any;
+};

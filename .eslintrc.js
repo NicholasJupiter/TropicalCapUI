@@ -6,7 +6,7 @@ module.export = {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true
-    }
+    },
   },
   "env": {
     "browser": true,

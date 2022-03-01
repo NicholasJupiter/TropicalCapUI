@@ -18,16 +18,16 @@
     "baseUrl": "./",
     "paths": {
       "@/*": [
-        "src/*"
+        "/src/*"
       ],
-      "pack/*": [
-        "src/packages/*"
+      "@p/*": [
+        "/src/packages/*"
       ],
-      "mobile/*": [
-        "src/sites/mobile/*"
+      "@mobile/*": [
+        "/src/sites/mobile/*"
       ],
-      "docs/*": [
-        "src/sites/docs/*"
+      "@docs/*": [
+        "/src/sites/docs/*"
       ]
     },
   },

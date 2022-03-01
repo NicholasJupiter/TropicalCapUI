@@ -14,9 +14,6 @@
     <cap-icon icon="droplet" size="36px"></cap-icon>
   </template>
   <span>Content</span>
-  <template #guide-text>
-    <span style="color: #666">View</span>
-  </template>
 </cap-cell>
 ```
 
@@ -25,7 +22,7 @@
 ```html
 <cap-cell @click="handleClick" is-link>
   <span>跳转</span>
-  <template #guide-text>
+  <template #trailing>
     <span style="color: #666">view</span>
   </template>
 </cap-cell>
@@ -44,5 +41,4 @@
 |  ----  | ----  | -
 | default | 内容展示区域 | -
 | leading | 领导内容 | -
-| guide-text  | 辅助内容 | -
 | trailing  | 尾部内容 | -

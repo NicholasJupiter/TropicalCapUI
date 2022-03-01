@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'docs',
-    component: () => import('docs/views/Index.vue'),
+    component: () => import('@docs/views/Index.vue'),
     children
   }
 ];

@@ -8,19 +8,33 @@ const { proxy } = getCurrentInstance();
 proxy.$toast.show({
   content: 'Toast content',
 });
+// 可直接传入内容
+proxy.$toast.show('Toast content');
 
-// 其他方法使用
+// vue2方法中使用
 this.$toast.show({
   content: 'Toast content',
 });
 ```
 
-## 插入DOM元素
+
+## 使用HTML
 
 ```javascript
 proxy.$toast.show({
-  content: h('p', { style: 'color:red' }, '插入HTML代码')
+  content: `<p style="color:red">插入HTML</p>`
 });
+```
+
+## 使用JSX和Vnode
+
+```javascript
+// jsx
+proxy.$toast.show({
+  content: <p style="color:red;">JSX</p>
+});
+// vnode
+proxy.$toast.show(h('soan', 'VNode'));
 ```
 
 ## API
@@ -29,7 +43,7 @@ proxy.$toast.show({
 
 |  参数   | 说明  | 类型 | 默认值 | 版本
 |  ----  | ----  | ---- | ---- | -
-| content | 显示文案 | string / VNode | `''` | -
+| content | 显示文案, 可当作第一个参数直接传入内容 | string / VNode | `''` | -
 | location | 显示位置 | `top` `bottom` | `bottom` | -
 | offset | 偏移位置 | string | `16px` | -
 | duration | 	展示时长(ms)，值为 0 时，toast 不会消失 | number | `2000` | -

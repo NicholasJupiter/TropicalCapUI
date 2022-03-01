@@ -52,58 +52,38 @@
     </transition>
   </teleport>
 </template>
-<script lang="ts">
+<script lang="tsx">
+const name = 'cap-loading';
+export default { name };
+</script>
+<script lang="tsx" setup>
 import { TLoadingOptions } from '@/packages/Loading/src/types';
-import {
-  createVNode,
-  defineComponent,
-  h,
-  nextTick,
-  reactive,
-  ref,
-  render
-} from 'vue';
+import { createVNode, h, nextTick, reactive, ref, render } from 'vue';
 
-export default defineComponent({
-  name: 'cap-loading',
-  props: {},
-  emits: [],
-  setup() {
-    const visibled = ref(false);
-    const loading = ref(null);
-    const options = reactive<TLoadingOptions>({
-      modal: true,
-      size: 48,
-      color: '#6481DC'
-    });
-    const service = (_options?: TLoadingOptions) => {
-      visibled.value = true;
-      _options && Object.assign(options, _options);
-      // 渲染内容
-      nextTick(() => {
-        options.content &&
-          render(
-            createVNode(
-              h(
-                'div',
-                {
-                  class: 'loading-content'
-                },
-                options.content
-              )
-            ),
-            loading.value!
-          );
-      });
-    };
-
-    const close = () => {
-      visibled.value = false;
-    };
-
-    return { close, visibled, service, options, loading };
-  }
+const visibled = ref(false);
+const loading = ref(null);
+const options = reactive<TLoadingOptions>({
+  modal: true,
+  size: 48,
+  color: '#6481DC'
 });
+const service = (_options?: TLoadingOptions) => {
+  visibled.value = true;
+  _options && Object.assign(options, _options);
+  // 渲染内容
+  nextTick(() => {
+    if (options.content) {
+      render(
+        createVNode(<div class="loading-content">{options.content}</div>),
+        loading.value!
+      );
+    }
+  });
+};
+
+const close = () => {
+  visibled.value = false;
+};
 </script>
 <style lang="scss" scoped>
 @import './loading.scss';
