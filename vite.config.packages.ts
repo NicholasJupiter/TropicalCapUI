@@ -34,7 +34,7 @@ export default defineConfig({
   },
   plugins: [vue()],
   build: {
-    outDir: './packages',
+    outDir: './lib',
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: ['vue'],
