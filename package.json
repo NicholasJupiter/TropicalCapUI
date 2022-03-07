@@ -6,8 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "build:p":"vite build --config vite.config.packages.ts",
-    "g:importFile":"node ./cmd/generateImportFile.js"
+    "build:p": "vite build --config vite.config.packages.ts",
+    "g:importFile": "node ./cmd/generateImportFile.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",

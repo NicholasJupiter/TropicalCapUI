@@ -1,5 +1,5 @@
-import { TLoadingOptions } from './packages/Loading/src/types.d';
-import { TToastOptions } from './packages/Toast/src/types';
+import { TLoadingOptions } from '../packages/Loading/src/types';
+import { TToastOptions } from '../packages/Toast/src/types';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {

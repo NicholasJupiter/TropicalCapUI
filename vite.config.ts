@@ -12,7 +12,7 @@ export default defineConfig({
     jsxFragment: 'Fragment',
     jsxInject: "import { h } from 'vue';"
   },
-  base: '/ju3x/',
+  base: '/cap3x/',
   resolve: {
     alias: {
       '@': resolve('./src'),
@@ -51,8 +51,9 @@ export default defineConfig({
     MD({
       markdownItOptions: {
         highlight: function (str, lang) {
-          if (lang && hljs.getLanguage(lang)) {
+          if (lang && hljs && hljs.highlight) {
             try {
+              // return Prism.highlight(str,Prism.languages[lang], lang);
               return hljs.highlight(lang, str).value;
             } catch (__) {}
           }

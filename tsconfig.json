@@ -4,6 +4,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
+    "allowJs": true, // 允许编译器编译JS，JSX文件
+    "checkJs": false, // 允许在JS文件中报错，通常与allowJS一起使用
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
@@ -15,19 +17,19 @@
     "types": [
       "vite/client"
     ],
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "/src/*"
+        "src/*"
       ],
       "@p/*": [
-        "/src/packages/*"
+        "src/packages/*"
       ],
       "@mobile/*": [
-        "/src/sites/mobile/*"
+        "src/sites/mobile/*"
       ],
       "@docs/*": [
-        "/src/sites/docs/*"
+        "src/sites/docs/*"
       ]
     },
   },
@@ -35,7 +37,9 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
   ],
   "exclude": [
     "node_modules",

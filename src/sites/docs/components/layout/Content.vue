@@ -11,6 +11,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
 import '@/sites/assets/styles/md-style.scss';
+import '@/sites/assets/styles/paraiso-light.min.css';
 import {
   onBeforeRouteUpdate,
   RouteLocationNormalized,
